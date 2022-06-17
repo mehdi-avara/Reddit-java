@@ -11,7 +11,7 @@ public class DataBase {
         }
         return singleTone;
     }
-    void addDataBase(String str,Controller controller){
+    public void addToDataBase(String str,Controller controller){
         dataBase.put(str,controller);
     }
     Controller getControllert(String str){

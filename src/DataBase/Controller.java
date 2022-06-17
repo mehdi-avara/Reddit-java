@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Controller {
+
     private FileWriter fileWriter;
     Controller(String fileName){
         try {
