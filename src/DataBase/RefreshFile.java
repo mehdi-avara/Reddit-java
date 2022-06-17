@@ -7,6 +7,7 @@ import java.io.FileWriter;
 public class RefreshFile {
     public static void main(String[] args) {
         File[] file = new File[13];
+
         String[] texts = new String[13];
         FileWriter[] fileWriters = new FileWriter[13];
         file[0] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
