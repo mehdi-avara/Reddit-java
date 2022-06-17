@@ -56,7 +56,7 @@ public class RefreshFile {
         }catch (Exception ignored){}
         try{
             for (int i = 0; i < file.length; i++) {
-                File f = new File(file[i].getAbsoluteFile()+"\\"+texts[i]+".txt");
+                File f = new File(file[i].getAbsolutePath()+"\\"+texts[i]+".txt");
                 f.createNewFile();
                 fileWriters[i] = new FileWriter(f);
             }

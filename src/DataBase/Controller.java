@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Controller {
 
     private FileWriter fileWriter;
-    Controller(String fileName){
+    public Controller(String fileName){
         try {
             fileWriter = new FileWriter(fileName,true);
         } catch (IOException e) {
