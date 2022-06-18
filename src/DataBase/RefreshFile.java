@@ -1,16 +1,15 @@
-
-
-import DataBase.DataBase;
-import DataBase.Controller;
+package DataBase;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.net.ServerSocket;
 
-public class Server {
-    private static File[] file = new File[13];
-    private static String[] texts = new String[13];
-    Server(){
+
+public class RefreshFile {
+    public static void main(String[] args) {
+        File[] file = new File[13];
+        String[] texts = new String[13];
+        FileWriter[] fileWriters = new FileWriter[13];
+
         file[0] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
         file[1] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
         file[2] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
@@ -47,14 +46,26 @@ public class Server {
 
         texts[11] = "ChatRoomAccounts";
         texts[12] = "ChatRoomData";
-    }
-    public static void main(String[] args) {
-        try {
-            ServerSocket serverSocket = new ServerSocket(1111);
-            for (int i = 0; i < file.length; i++) {
-                DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath()+texts[i]));
+        try{
+            for (File item :
+                    file) {
+             if (!item.exists()){
+                 item.mkdirs();
+             }
             }
-
         }catch (Exception ignored){}
+        try{
+            for (int i = 0; i < file.length; i++) {
+                File f = new File(file[i].getAbsolutePath()+"\\"+texts[i]+".txt");
+                f.createNewFile();
+                fileWriters[i] = new FileWriter(f);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
     }
 }
