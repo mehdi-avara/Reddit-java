@@ -11,6 +11,8 @@ public class RecommendationSystem {
     public static void main(String[] args) throws FileNotFoundException {
         BufferedReader reader = new BufferedReader(new FileReader("E:\\morteza buy bastani\\src\\post_data.csv"));
         List<String> lines = new ArrayList<>();
+        List<String> categorys = new ArrayList<>();
+
         String line = null;
         try {
             while ((line = reader.readLine()) != null) {
@@ -20,8 +22,14 @@ public class RecommendationSystem {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        String[] data = lines.get(1).split(",");
-        // System.out.println(data[0]);
-        // System.out.println(lines.get(1));
+        int i = 1;
+        while (i < 6000) {
+            if (!categorys.contains(lines.get(i).split(",")[1]) && lines.get(i).split(",")[1].length() <= 13) {
+                categorys.add(lines.get(i).split(",")[1]);
+            }
+            i++;
+        }
+
     }
+
 }
