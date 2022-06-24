@@ -1,28 +1,40 @@
 import java.io.*;
 import java.lang.*;
-import java.net.ServerSocket;
 import java.net.*;
 import java.util.*;
 
 class Server {
-    ServerSocket serverSocket;
-    Socket socket;
-    InputStream inputStream;
-    OutputStream outputStream;
-    RandomAccessFile randomAccessFile;
+    static boolean isServerUp = true;
+    static int port = 8888;
 
-    Server() {
+    public static void main(String[] args) {
         try {
-            serverSocket = new ServerSocket(8888);
-            System.out.println("Server is listening on port 8888");
-            socket = new Socket("192.168.1.108", 8888);
-            socket = serverSocket.accept();
-            System.out.println("Client connected");
-            inputStream = socket.getInputStream();
-            outputStream = socket.getOutputStream();
-            randomAccessFile = new RandomAccessFile("ServerEnables.txt", "rw");
+            ServerSocket serverSocket = new ServerSocket(port);
+            while (isServerUp) {
+                Socket socket = serverSocket.accept();
+                System.out.println("server is connected");
+                RequestHandler requestHandler = new RequestHandler(socket);
+                requestHandler.start();
+            }
+            serverSocket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("server cannot create and connect to client");
+        }
+    }
+}
+
+class RequestHandler extends Thread {
+    Socket socket;
+    DataInputStream dis;
+    DataOutputStream dos;
+
+    public RequestHandler(Socket socket) {
+        this.socket = socket;
+        try {
+            dis = new DataInputStream(socket.getInputStream());
+            dos = new DataOutputStream(socket.getOutputStream());
+        } catch (IOException e) {
+            System.out.println("server cannot create input and output stream");
         }
     }
 
