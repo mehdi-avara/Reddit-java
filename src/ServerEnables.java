@@ -38,4 +38,49 @@ class RequestHandler extends Thread {
         }
     }
 
+    String reader() {
+        StringBuilder read = new StringBuilder();
+        StringBuilder byteCounter = new StringBuilder();
+        char i;
+
+        try {
+            while ((i = (char) dis.readByte()) != '\n') {
+                byteCounter.append(i);
+            }
+            int counter = Integer.parseInt(byteCounter.toString());
+            for (int j = 0; j < counter; j++) {
+                read.append((char) dis.readByte());
+            }
+        } catch (IOException e) {
+            try {
+                socket.close();
+                dis.close();
+                dos.close();
+            } catch (IOException IO) {
+                IO.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        return read.toString();
+    }
+
+    void writer(String text) {
+        if (!text.isEmpty() && text != null) {
+            try {
+                dos.writeBytes(text);
+                System.out.println("server sent: " + text);
+            } catch (IOException e) {
+                try {
+                    socket.close();
+                    dis.close();
+                    dos.close();
+                } catch (IOException IO) {
+                    IO.printStackTrace();
+                }
+            }
+            return;
+        }
+        System.out.println("server cannot send empty string,writing defeat");
+    }
+
 }
