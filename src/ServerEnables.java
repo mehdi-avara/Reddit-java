@@ -3,6 +3,8 @@ import java.lang.*;
 import java.net.*;
 import java.util.*;
 
+import DataBase.DataBase;
+
 class Server {
     static boolean isServerUp = true;
     static int port = 8888;
@@ -83,4 +85,38 @@ class RequestHandler extends Thread {
         System.out.println("server cannot send empty string,writing defeat");
     }
 
+    @Override
+    public void run() {
+        String request = reader();
+        String[] requestSplits = request.split(" ");
+
+        String id = requestSplits[0];
+        String command = requestSplits[1];
+        String data = requestSplits[2];
+        String response = "done";
+        if (command.equals("read")) {
+            response = DataBase.getDataBase().getControllert(id).readFile();
+        } else if (command.equals("write")) {
+            DataBase.getDataBase().getControllert(id).writeFile(data);
+            response = data;
+        } else if (command.equals("remove")) {
+            DataBase.getDataBase().getControllert(id).removeId(data);
+            response = data;
+        } else if (command.equals("reset")) {
+            DataBase.getDataBase().getControllert(id).writeFile("", true);
+            response = data;
+        } else if (command.equals("exit")) {
+            response = "exit";
+        } else {
+            response = "invalid";
+        }
+        writer(response);
+        try {
+            socket.close();
+            dis.close();
+            dos.close();
+        } catch (IOException IO) {
+            IO.printStackTrace();
+        }
+    }
 }
