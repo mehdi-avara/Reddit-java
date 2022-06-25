@@ -3,9 +3,15 @@
 import DataBase.DataBase;
 import DataBase.Controller;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
 
 public class Server {
     private static File[] file = new File[13];
@@ -49,12 +55,29 @@ public class Server {
         texts[12] = "ChatRoomData";
     }
     public static void main(String[] args) {
+        System.out.println("Server is running...");
+        while (true) {
         try {
-            ServerSocket serverSocket = new ServerSocket(1111);
-            for (int i = 0; i < file.length; i++) {
-                DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath()+texts[i]));
+            ServerSocket serverSocket = new ServerSocket(8080);
+            // for (int i = 0; i < file.length; i++) {
+            //     DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath()+texts[i]));
+            // }
+            System.out.println("Server is running");
+            Socket socket = serverSocket.accept();
+            System.out.println("Client connected");
+            DataOutputStream outputStream =new DataOutputStream(socket.getOutputStream());
+            DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+            int count;
+            while ((count = inputStream.readByte()) != 0) {
+                System.out.println("Client request: " + (char)count);
             }
+            System.out.println("request is done");
+            Scanner scanner = new Scanner(System.in);
+            outputStream.writeChars(scanner.next());
+            outputStream.flush();
+            socket.close();
 
         }catch (Exception ignored){}
+    }
     }
 }

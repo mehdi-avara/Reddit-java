@@ -1,0 +1,1 @@
+inputStream.readByte()
