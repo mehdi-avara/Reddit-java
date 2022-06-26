@@ -65,11 +65,11 @@ public class RefreshFile {
             e.printStackTrace();
         }
         fileWriters[0].write("00000 email@hello.com ");
-        // regex (?<UserId>[^ ]*) (?<UserMail>[^ ]*)
+        // regex (?<UserId>[^ ]*) (?<UserMail>[^ ]*) 
         fileWriters[4].write("00000 ownerId ");
-        // regex (?<communityId>[^ ]*) (?<ownerId>[^ ]*)
+        // regex (?<communityId>[^ ]*) (?<ownerId>[^ ]*) 
         fileWriters[8].write("000000 000000 000000 ");
-        // regex (?<postId>[^ ]*) (?<ownerId>[^ ]*) (?<communityId>[^ ]*)
+        // regex (?<postId>[^ ]*) (?<ownerId>[^ ]*) (?<communityId>[^ ]*) 
         fileWriters[11].write("000000 000000 000000 ");
         // regex (?<chatRoomId>[^ ]*) (?<ownerId>[^ ]*) (?<otherUserId[^ ]*)
         File firstuser = new File("D:\\ApProjectDataBase\\DataBase\\Accounts\\Datas\\000000.txt");
