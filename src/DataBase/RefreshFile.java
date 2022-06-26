@@ -66,7 +66,7 @@ public class RefreshFile {
         }
         fileWriters[0].write("00000 email@hello.com ");
         // regex (?<UserId>[^ ]*) (?<UserMail>[^ ]*)
-        fileWriters[4].write("000000= ownerId ");
+        fileWriters[4].write("00000 ownerId ");
         // regex (?<communityId>[^ ]*) (?<ownerId>[^ ]*)
         fileWriters[8].write("000000 000000 000000 ");
         // regex (?<postId>[^ ]*) (?<ownerId>[^ ]*) (?<communityId>[^ ]*)
