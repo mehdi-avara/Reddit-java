@@ -22,7 +22,7 @@ public class Controller {
 
     }
 
-    String readFile() {
+    public String readFile() {
         StringBuilder recovery = new StringBuilder();
         String i;
         try {
@@ -37,7 +37,7 @@ public class Controller {
         return recovery.toString();
     }
 
-    void writeFile(String text, boolean... reset) {
+    public void writeFile(String text, boolean... reset) {
         try {
             if (reset.length != 0) {
                 fw = new FileWriter(file);
@@ -47,6 +47,7 @@ public class Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return;
     }
 
     String getRowString(String id) {
@@ -59,7 +60,7 @@ public class Controller {
         return "invalid";
     }
 
-    void removeId(String id) {
+    public void removeId(String id) {
         String[] splits = this.readFile().split("\n");
         StringBuilder sb = new StringBuilder();
         for (String str : splits) {
@@ -69,4 +70,5 @@ public class Controller {
         }
         this.writeFile(sb.toString());
     }
+
 }
