@@ -1,22 +1,16 @@
 
 
-import DataBase.DataBase;
-import DataBase.Controller;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Server {
+public class ServerTest {
     private static File[] file = new File[13];
     private static String[] texts = new String[13];
-    Server(){
+    ServerTest(){
         file[0] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
         file[1] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
         file[2] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");

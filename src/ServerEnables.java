@@ -7,7 +7,7 @@ import DataBase.DataBase;
 
 class Server {
     static boolean isServerUp = true;
-    static int port = 8888;
+    static int port = 8080;
 
     public static void main(String[] args) {
         try {
