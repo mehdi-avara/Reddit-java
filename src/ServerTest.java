@@ -16,6 +16,8 @@ public class ServerTest {
     private static File[] file = new File[13];
     private static String[] texts = new String[13];
     ServerTest(){
+    }
+    public static void main(String[] args) {
         file[0] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
         file[1] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
         file[2] = new File("D:\\ApProjectDataBase\\DataBase\\Accounts");
@@ -52,10 +54,10 @@ public class ServerTest {
 
         texts[11] = "ChatRoomAccounts";
         texts[12] = "ChatRoomData";
-    }
-    public static void main(String[] args) {
+        for (int i = 0; i < file.length; i++) {
+            DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath()+texts[i]+".txt"));
+        }
         DataBase.getDataBase().addToDataBase("PeopleAccounts",new Controller("D:\\ApProjectDataBase\\DataBase\\Accounts\\PeopleAccounts.txt"));
-            
         DataBase.getDataBase().addToDataBase2("PeopleAccounts",new datasController("D:\\ApProjectDataBase\\DataBase\\Accounts\\datas"));
         DataBase.getDataBase().addToDataBase2("Communities",new datasController("D:\\ApProjectDataBase\\DataBase\\Communities\\datas"));
         DataBase.getDataBase().addToDataBase2("Posts",new datasController("D:\\ApProjectDataBase\\DataBase\\Posts\\datas"));
