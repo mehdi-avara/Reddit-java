@@ -64,14 +64,20 @@ public class RefreshFile {
         }catch (Exception e){
             e.printStackTrace();
         }
-        fileWriters[0].write("0 email@hello.com ");
-        // regex (?<UserId>[^ ]*) (?<UserMail>[^ ]*) 
+        fileWriters[0].write("0 email@gmail.com userName ");
+        // regex (?<UserId>[^ ]*) (?<email>[^ ]*) (?<userName>[^ ]*) 
+        fileWriters[0].flush();
         fileWriters[4].write("0 ownerId ");
         // regex (?<communityId>[^ ]*) (?<ownerId>[^ ]*) 
+        fileWriters[4].flush();
         fileWriters[8].write("0 0 0 ");
         // regex (?<postId>[^ ]*) (?<ownerId>[^ ]*) (?<communityId>[^ ]*) 
+        fileWriters[8].flush();
+        
         fileWriters[11].write("0 0 0 ");
         // regex (?<chatRoomId>[^ ]*) (?<ownerId>[^ ]*) (?<otherUserId[^ ]*)
+        fileWriters[11].flush();
+
         File firstuser = new File("D:\\ApProjectDataBase\\DataBase\\Accounts\\Datas\\0.txt");
         firstuser.createNewFile();
         FileWriter firstuserWriter = new FileWriter(firstuser);
@@ -81,21 +87,21 @@ public class RefreshFile {
         File firstCommunity = new File("D:\\ApProjectDataBase\\DataBase\\Communities\\datas\\0.txt");
         firstCommunity.createNewFile();
         FileWriter firstCommunityWriter = new FileWriter(firstCommunity);
-        firstuserWriter.write("communityName ownerId {0,} {0,} ");
+        firstCommunityWriter.write("communityName ownerId {0,} {0,} ");
         // regex (?<communityName>[^ ]*) (?<ownerId>[^ ]*) [{]{1}(?<adminId>[^}]*)[}]{1} [{]{1}(?<postId>[^}]*)[}]{1} 
-        firstuserWriter.flush();
+        firstCommunityWriter.flush();
         File firstPost = new File("D:\\ApProjectDataBase\\DataBase\\Posts\\datas\\0.txt");
         firstPost.createNewFile();
         FileWriter firstPostWriter = new FileWriter(firstPost);
-        firstuserWriter.write("ownerId communityId {0,} postTitle\ndiscription");
+        firstPostWriter.write("ownerId communityId {0,} postTitle\ndiscription");
         // regex (?<ownerId>[^ ]*) (?<communityId>[^ ]*) [{]{1}(?<commentId>[^}]*)[}]{1} (?<postTitle>[^ ]*)[\n](?<discription>.*)
-        firstuserWriter.flush();
+        firstPostWriter.flush();
         File firstComment = new File("D:\\ApProjectDataBase\\DataBase\\Comments\\datas\\0.txt");
         firstComment.createNewFile();
         FileWriter firstCommentWriter = new FileWriter(firstComment);
-        firstuserWriter.write("0 0 {0,} commentTitle\ndiscription");
+        firstCommentWriter.write("0 0 {0,} commentTitle\ndiscription");
         // regex (?<ownerId>[^ ]*) (?<postId>[^ ]*) [{]{1}(?<commentId>[^}]*)[}]{1} (?<commentTitle>[^ ]*)[\n](?<discription>.*)
-        firstuserWriter.flush();
+        firstCommentWriter.flush();
 
 
     }

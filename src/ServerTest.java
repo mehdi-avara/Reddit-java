@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 import DataBase.Controller;
 import DataBase.DataBase;
+import DataBase.datasController;
+import tasks.SignUpAndLogin;
 
 public class ServerTest {
     private static File[] file = new File[13];
@@ -52,29 +54,41 @@ public class ServerTest {
         texts[12] = "ChatRoomData";
     }
     public static void main(String[] args) {
-        System.out.println("Server is running...");
-        while (true) {
-        try {
-            ServerSocket serverSocket = new ServerSocket(8080);
-            for (int i = 0; i < file.length; i++) {
-                DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath()+texts[i]));
-            }
-            System.out.println("Server is running");
-            Socket socket = serverSocket.accept();
-            System.out.println("Client connected");
-            DataOutputStream outputStream =new DataOutputStream(socket.getOutputStream());
-            DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-            int count;
-            while ((count = inputStream.readByte()) != 0) {
-                System.out.println("Client request: " + (char)count);
-            }
-            System.out.println("request is done");
-            Scanner scanner = new Scanner(System.in);
-            outputStream.writeChars(scanner.next());
-            outputStream.flush();
-            socket.close();
+        DataBase.getDataBase().addToDataBase("PeopleAccounts",new Controller("D:\\ApProjectDataBase\\DataBase\\Accounts\\PeopleAccounts.txt"));
+            
+        DataBase.getDataBase().addToDataBase2("PeopleAccounts",new datasController("D:\\ApProjectDataBase\\DataBase\\Accounts\\datas"));
+        DataBase.getDataBase().addToDataBase2("Communities",new datasController("D:\\ApProjectDataBase\\DataBase\\Communities\\datas"));
+        DataBase.getDataBase().addToDataBase2("Posts",new datasController("D:\\ApProjectDataBase\\DataBase\\Posts\\datas"));
+        DataBase.getDataBase().addToDataBase2("Comments",new datasController("D:\\ApProjectDataBase\\DataBase\\Comments\\datas"));
+        DataBase.getDataBase().addToDataBase2("ChatRoomAccounts",new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
+        DataBase.getDataBase().addToDataBase2("ChatRoomData",new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
+        System.out.println(SignUpAndLogin.signUp("email@gmail.com", "username", "password"));
+        System.out.println(SignUpAndLogin.signUp("bye@hello.com", "username2", "password"));
+        System.out.println(SignUpAndLogin.signUp("byee@hello.com", "username2", "password"));
+        System.out.println(SignUpAndLogin.signUp("byee@hello.com", "username3", "password"));
+        // System.out.println("Server is running...");
+        // while (true) {
+        // try {
+            // ServerSocket serverSocket = new ServerSocket(8080);
+            
 
-        }catch (Exception ignored){}
-    }
+
+        //     System.out.println("Server is running");
+        //     Socket socket = serverSocket.accept();
+        //     System.out.println("Client connected");
+        //     DataOutputStream outputStream =new DataOutputStream(socket.getOutputStream());
+        //     DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+        //     int count;
+        //     while ((count = inputStream.readByte()) != 0) {
+        //         System.out.println("Client request: " + (char)count);
+        //     }
+        //     System.out.println("request is done");
+        //     Scanner scanner = new Scanner(System.in);
+        //     outputStream.writeChars(scanner.next());
+        //     outputStream.flush();
+        //     socket.close();
+
+        // }catch (Exception ignored){}
+    // }
     }
 }
