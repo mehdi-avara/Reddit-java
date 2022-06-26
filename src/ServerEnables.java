@@ -120,3 +120,11 @@ class RequestHandler extends Thread {
         }
     }
 }
+
+// SignUp
+// Search
+// Login
+// AddPost
+// FavoritePost
+// follow
+//
