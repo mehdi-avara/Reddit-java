@@ -17,7 +17,7 @@ public class DataBase {
         dataBase.put(str, controller);
     }
 
-    public Controller getControllert(String str) {
+    public static Controller getControllert(String str) {
         return dataBase.get(str);
     }
 }

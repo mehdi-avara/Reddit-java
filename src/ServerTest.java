@@ -7,6 +7,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
+import DataBase.Controller;
+import DataBase.DataBase;
+
 public class ServerTest {
     private static File[] file = new File[13];
     private static String[] texts = new String[13];
@@ -53,9 +56,9 @@ public class ServerTest {
         while (true) {
         try {
             ServerSocket serverSocket = new ServerSocket(8080);
-            // for (int i = 0; i < file.length; i++) {
-            //     DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath()+texts[i]));
-            // }
+            for (int i = 0; i < file.length; i++) {
+                DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath()+texts[i]));
+            }
             System.out.println("Server is running");
             Socket socket = serverSocket.accept();
             System.out.println("Client connected");
