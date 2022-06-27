@@ -95,6 +95,9 @@ class RequestHandler extends Thread {
             HashMap<String, String> data = new HashMap<String, String>(
                     Map.of("username", split[1], "email", split[2], "password", split[3]));
             User user = new User(data);
+            if(user.alreadyUsername().equals("invalid")){
+                writer("")
+            }
 
         }
         try {

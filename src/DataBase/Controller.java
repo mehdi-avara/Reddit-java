@@ -1,9 +1,11 @@
 package DataBase;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.sql.Ref;
 
 public class Controller {
     private final File file;
@@ -15,7 +17,7 @@ public class Controller {
         try {
             raf = new RandomAccessFile(file, "rw");
             String last = readFile();
-            fw = new FileWriter(file);
+            fw = new FileWriter(file,true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,5 +72,4 @@ public class Controller {
         }
         this.writeFile(sb.toString());
     }
-
 }
