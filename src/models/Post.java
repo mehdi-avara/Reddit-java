@@ -13,4 +13,8 @@ public class Post {
     public static int getNewId() {
         return id++;
     }
+    public static void setId(){
+        datasController controller = DataBase.getControllert2("Posts");
+        id = controller.countFiles();
+    }
 }

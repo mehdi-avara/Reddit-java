@@ -11,6 +11,7 @@ import DataBase.Controller;
 import DataBase.DataBase;
 import DataBase.datasController;
 import tasks.AddPost;
+import models.Post;
 import models.User;
 import tasks.SignUpAndLogin;
 
@@ -61,20 +62,15 @@ public class ServerTest {
         for (int i = 0; i < file.length; i++) {
             DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath() + texts[i] + ".txt"));
         }
-        DataBase.getDataBase().addToDataBase("PeopleAccounts",
-                new Controller("D:\\ApProjectDataBase\\DataBase\\Accounts\\PeopleAccounts.txt"));
-        DataBase.getDataBase().addToDataBase2("PeopleAccounts",
-                new datasController("D:\\ApProjectDataBase\\DataBase\\Accounts\\datas"));
-        DataBase.getDataBase().addToDataBase2("Communities",
-                new datasController("D:\\ApProjectDataBase\\DataBase\\Communities\\datas"));
-        DataBase.getDataBase().addToDataBase2("Posts",
-                new datasController("D:\\ApProjectDataBase\\DataBase\\Posts\\datas"));
-        DataBase.getDataBase().addToDataBase2("Comments",
-                new datasController("D:\\ApProjectDataBase\\DataBase\\Comments\\datas"));
-        DataBase.getDataBase().addToDataBase2("ChatRoomAccounts",
-                new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
-        DataBase.getDataBase().addToDataBase2("ChatRoomData",
-                new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
+        DataBase.getDataBase().addToDataBase("PeopleAccounts",new Controller("D:\\ApProjectDataBase\\DataBase\\Accounts\\PeopleAccounts.txt"));
+        DataBase.getDataBase().addToDataBase2("PeopleAccounts",new datasController("D:\\ApProjectDataBase\\DataBase\\Accounts\\datas"));
+        DataBase.getDataBase().addToDataBase2("Communities",new datasController("D:\\ApProjectDataBase\\DataBase\\Communities\\datas"));
+        DataBase.getDataBase().addToDataBase2("Posts",new datasController("D:\\ApProjectDataBase\\DataBase\\Posts\\datas"));
+        DataBase.getDataBase().addToDataBase2("Comments",new datasController("D:\\ApProjectDataBase\\DataBase\\Comments\\datas"));
+        DataBase.getDataBase().addToDataBase2("ChatRoomAccounts",new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
+        DataBase.getDataBase().addToDataBase2("ChatRoomData",new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
+        User.setId();
+        Post.setId();
         System.out.println(SignUpAndLogin.signUp("signUp email@gmail.com username password"));
         System.out.println(SignUpAndLogin.signUp("signUp bye@hello.com username2 password"));
         System.out.println(SignUpAndLogin.signUp("signUp byee@hello.com username2 password"));
@@ -118,7 +114,7 @@ class connectionHandler extends Thread{
                     outputStream.write(x.getBytes());
                     outputStream.flush();
                     break;
-                case "addPost":
+                case "addPos":
                     String y = AddPost.addPost(request.toString());
                     outputStream.write(y.getBytes());
                     outputStream.flush();
