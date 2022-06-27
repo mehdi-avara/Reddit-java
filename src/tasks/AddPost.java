@@ -29,6 +29,8 @@ public class AddPost {
         datasController communityController2 = DataBase.getControllert2("communities/CommunitiesPosts");
         communityController2.createFile(postID + "");
         communityController2.write(postID + " ", personID + " " + communityID + " {} " + title + "\n" + description);
+
+        controller2.write(postID + " ", personID + " " + communityID + " {} " + title + "\n" + description);
         return "success " + postID;
 
     }
