@@ -10,6 +10,7 @@ import java.util.Scanner;
 import DataBase.Controller;
 import DataBase.DataBase;
 import DataBase.datasController;
+import models.User;
 import tasks.SignUpAndLogin;
 
 public class ServerTest {
@@ -64,10 +65,11 @@ public class ServerTest {
         DataBase.getDataBase().addToDataBase2("Comments",new datasController("D:\\ApProjectDataBase\\DataBase\\Comments\\datas"));
         DataBase.getDataBase().addToDataBase2("ChatRoomAccounts",new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
         DataBase.getDataBase().addToDataBase2("ChatRoomData",new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
+        User.setId();
         System.out.println(SignUpAndLogin.signUp("signUp email@gmail.com username password"));
         System.out.println(SignUpAndLogin.signUp("signUp bye@hello.com username2 password"));
         System.out.println(SignUpAndLogin.signUp("signUp byee@hello.com username2 password"));
-        System.out.println(SignUpAndLogin.signUp("signUp byee@hello.com username3 password"));
+        System.out.println(SignUpAndLogin.signUp("signUp byeee@hello.com username4 password"));
         System.out.println("server is running");
         while (true) {
         try {
