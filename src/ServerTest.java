@@ -64,33 +64,54 @@ public class ServerTest {
         DataBase.getDataBase().addToDataBase2("Comments",new datasController("D:\\ApProjectDataBase\\DataBase\\Comments\\datas"));
         DataBase.getDataBase().addToDataBase2("ChatRoomAccounts",new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
         DataBase.getDataBase().addToDataBase2("ChatRoomData",new datasController("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas"));
-        System.out.println(SignUpAndLogin.signUp("email@gmail.com", "username", "password"));
-        System.out.println(SignUpAndLogin.signUp("bye@hello.com", "username2", "password"));
-        System.out.println(SignUpAndLogin.signUp("byee@hello.com", "username2", "password"));
-        System.out.println(SignUpAndLogin.signUp("byee@hello.com", "username3", "password"));
-        // System.out.println("Server is running...");
-        // while (true) {
-        // try {
-            // ServerSocket serverSocket = new ServerSocket(8080);
-            
+        System.out.println(SignUpAndLogin.signUp("signUp email@gmail.com username password"));
+        System.out.println(SignUpAndLogin.signUp("signUp bye@hello.com username2 password"));
+        System.out.println(SignUpAndLogin.signUp("signUp byee@hello.com username2 password"));
+        System.out.println(SignUpAndLogin.signUp("signUp byee@hello.com username3 password"));
+        System.out.println("server is running");
+        while (true) {
+        try {
+            ServerSocket serverSocket = new ServerSocket(8080);
+            Socket socket = serverSocket.accept();
+            System.out.println("Client connected");
+            connectionHandler handler =new connectionHandler(socket);
+            handler.start();
 
 
-        //     System.out.println("Server is running");
-        //     Socket socket = serverSocket.accept();
-        //     System.out.println("Client connected");
-        //     DataOutputStream outputStream =new DataOutputStream(socket.getOutputStream());
-        //     DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-        //     int count;
-        //     while ((count = inputStream.readByte()) != 0) {
-        //         System.out.println("Client request: " + (char)count);
-        //     }
-        //     System.out.println("request is done");
-        //     Scanner scanner = new Scanner(System.in);
-        //     outputStream.writeChars(scanner.next());
-        //     outputStream.flush();
-        //     socket.close();
 
-        // }catch (Exception ignored){}
-    // }
+        }catch (Exception ignored){}
+    }
     }
 }
+class connectionHandler extends Thread{
+    private DataOutputStream outputStream;
+    private DataInputStream inputStream;
+    private StringBuilder request = new StringBuilder();
+    connectionHandler(Socket socket){
+        try {
+            outputStream = new DataOutputStream(socket.getOutputStream());
+            inputStream = new DataInputStream(socket.getInputStream());
+        }catch (Exception ignored){}
+    }
+    @Override
+    public void run() {
+        try {
+            int count;
+            while ((count = inputStream.readByte()) != 0) {
+                request.append((char)count);
+            }
+            String requestString = request.substring(0,6);
+            switch (requestString){
+                case "signUp":
+                    String x = SignUpAndLogin.signUp(request.toString());
+                    outputStream.write(x.getBytes());
+                    outputStream.flush();
+                    break;
+            
+                default:
+                    break;
+            }
+            
+
+        }catch (Exception ignored){}
+    }}
