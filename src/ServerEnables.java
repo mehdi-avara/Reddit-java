@@ -3,11 +3,12 @@ import java.lang.*;
 import java.net.*;
 import java.util.*;
 
+import DataBase.Controller;
 import DataBase.DataBase;
 
 class Server {
     static boolean isServerUp = true;
-    static int port = 8080;
+    static int port = 8888;
 
     public static void main(String[] args) {
         try {
@@ -40,7 +41,7 @@ class RequestHandler extends Thread {
         }
     }
 
-    String reader() {
+    String listener() {
         StringBuilder read = new StringBuilder();
         StringBuilder byteCounter = new StringBuilder();
         char i;
@@ -87,30 +88,18 @@ class RequestHandler extends Thread {
 
     @Override
     public void run() {
-        String request = reader();
-        String[] requestSplits = request.split(" ");
+        String command = listener();
+        System.out.println("server received: " + command);
+        String[] split = command.split("-");
+        if (split[0].equals("SignUp")) {
+            HashMap<String, String> data = new HashMap<String, String>(
+                    Map.of("username", split[1], "email", split[2], "password", split[3]));
+            User user = new User(data);
+            if(user.alreadyUsername().equals("invalid")){
+                writer("")
+            }
 
-        String id = requestSplits[0];
-        String command = requestSplits[1];
-        String data = requestSplits[2];
-        String response = "done";
-        if (command.equals("read")) {
-            response = DataBase.getDataBase().getControllert(id).readFile();
-        } else if (command.equals("write")) {
-            DataBase.getDataBase().getControllert(id).writeFile(data);
-            response = data;
-        } else if (command.equals("remove")) {
-            DataBase.getDataBase().getControllert(id).removeId(data);
-            response = data;
-        } else if (command.equals("reset")) {
-            DataBase.getDataBase().getControllert(id).writeFile("", true);
-            response = data;
-        } else if (command.equals("exit")) {
-            response = "exit";
-        } else {
-            response = "invalid";
         }
-        writer(response);
         try {
             socket.close();
             dis.close();
@@ -120,3 +109,26 @@ class RequestHandler extends Thread {
         }
     }
 }
+
+// SignUp
+// Search
+// Login
+// AddPost
+// FavoritePost
+// follow
+// // response = DataBase.getDataBase().getControllert(id).readFile();
+// } else if (command.equals("write")) {
+// DataBase.getDataBase().getControllert(id).writeFile(data);
+// response = data;
+// } else if (command.equals("remove")) {
+// DataBase.getDataBase().getControllert(id).removeId(data);
+// response = data;
+// } else if (command.equals("reset")) {
+// DataBase.getDataBase().getControllert(id).writeFile("", true);
+// response = data;
+// } else if (command.equals("exit")) {
+// response = "exit";
+// } else {
+// response = "invalid";
+// }
+// writer(response);
