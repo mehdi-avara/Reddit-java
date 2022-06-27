@@ -6,10 +6,14 @@ import DataBase.datasController;
 import models.User;
 
 public class SignUpAndLogin{
-    public static String signUp(String email,String userName, String password){
+    public static String signUp(String request){
+        //regex email username password
+        String[] requestSplit = request.split(" ");
+        return signUp(requestSplit[1],requestSplit[2],requestSplit[3]);
+    }
+    private static String signUp(String email,String userName, String password){
         Controller controller = DataBase.getControllert("PeopleAccounts");
         String str = controller.readFile();
-        System.out.println(str);
         if (str.contains(email)) {
             return "Email already exists";
         }
@@ -21,6 +25,6 @@ public class SignUpAndLogin{
         datasController controller2 = DataBase.getControllert2("PeopleAccounts");
         controller2.createFile(id + "");
         controller2.write(id+"",userName+" "+ email+ " " +password+ " {} {} {} {} {} {}");
-        return "success";
+        return "success "+id;
     }
 }
