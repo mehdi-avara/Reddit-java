@@ -59,8 +59,7 @@ public class ServerTest {
         texts[11] = "ChatRoomAccounts";
         texts[12] = "ChatRoomData";
         for (int i = 0; i < file.length; i++) {
-            DataBase.getDataBase().addToDataBase(texts[i],
-                    new Controller(file[i].getAbsolutePath() + texts[i] + ".txt"));
+            DataBase.getDataBase().addToDataBase(texts[i],new Controller(file[i].getAbsolutePath() + texts[i] + ".txt"));
         }
         DataBase.getDataBase().addToDataBase("PeopleAccounts",
                 new Controller("D:\\ApProjectDataBase\\DataBase\\Accounts\\PeopleAccounts.txt"));

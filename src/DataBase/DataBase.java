@@ -3,32 +3,34 @@ package DataBase;
 import java.util.HashMap;
 
 public class DataBase {
-    static private final HashMap<String, Controller> dataBase = new HashMap<String, Controller>();
-    static private final HashMap<String, datasController> dataBase2 = new HashMap<String, datasController>();
-    static private DataBase singleTone;
-    public static int accountCounter = 0;
-    static int communityCounter = 0;
+    private static final HashMap<String, Controller> dataBase = new HashMap();
+    private static final HashMap<String, datasController> dataBase2 = new HashMap();
+    private static DataBase singleTone;
 
-    public void addToDataBase(String str, Controller controller) {
-        dataBase.put(str, controller);
+    public DataBase() {
     }
 
-    public static Controller getControllert(String str) {
-        return dataBase.get(str);
-    }
-<<<<<<< HEAD
-
-    public static DataBase getSingleTone() {
+    public static DataBase getDataBase() {
         if (singleTone == null) {
             singleTone = new DataBase();
         }
+
         return singleTone;
-=======
-    public static datasController getControllert2(String str) {
-        return dataBase2.get(str);
     }
-    public static void addToDataBase2(String str, datasController controller) {
-        dataBase2.put(str, controller);
->>>>>>> 7f3c95ddc8bd6b71aa9bb43a5edd5075a86882a4
+
+    public void addToDataBase(String var1, Controller var2) {
+        dataBase.put(var1, var2);
+    }
+
+    public static Controller getControllert(String var0) {
+        return (Controller)dataBase.get(var0);
+    }
+
+    public static datasController getControllert2(String var0) {
+        return (datasController)dataBase2.get(var0);
+    }
+
+    public static void addToDataBase2(String var0, datasController var1) {
+        dataBase2.put(var0, var1);
     }
 }
