@@ -1,5 +1,8 @@
 package tasks;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import DataBase.Controller;
 import DataBase.DataBase;
 import DataBase.datasController;
@@ -7,21 +10,20 @@ import models.Post;
 
 public class AddPost {
     public static String addPost(String request) {
-        String[] requestSplit = request.split(" ");
-        return addPost(requestSplit[1], requestSplit[2], requestSplit[3], requestSplit[4]);
+        Pattern pattern = Pattern.compile("(?<UserId>[^ ]*) (?<comId>[^ ]*) (?<title>[^\n]*)\n(?<desc>[^\0]*)");
+        Matcher matcher = pattern.matcher(request);
+        return addPost(matcher.group("UserId"), matcher.group("comId"), matcher.group("title"), matcher.group("desc"));
     }
 
     private static String addPost(String personId, String communityId, String title, String description) {
-        Controller controller = DataBase.getControllert("CommunitiesPosts");
-        String str = controller.readFile();
+        Controller controller = DataBase.getControllert("Posts");
         int postID = Post.getNewId();
         int personID = Integer.parseInt(personId);
         int communityID = Integer.parseInt(communityId);
-        controller.writeFile(postID + " " + personID + " " + communityID + " " + title + "\n" + description + " ");
-        datasController controller2 = DataBase.getControllert2("CommunitiesPosts");
+        controller.writeFile(postID + " " + personID + " " + communityID);
+        datasController controller2 = DataBase.getControllert2("Posts");
         controller2.createFile(postID + "");
-        controller2.write(postID + "",
-                personID + " " + communityID + " " + title + " " + "\n" + description + " {} {} {} {} {} {}");
+        controller2.write(postID + " ",personID + " " + communityID + " {} "+title + "\n" + description);
         return "success " + postID;
 
     }
