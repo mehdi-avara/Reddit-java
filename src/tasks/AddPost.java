@@ -16,7 +16,7 @@ public class AddPost {
     }
 
     private static String addPost(String personId, String communityId, String title, String description) {
-        Controller controller = DataBase.getControllert("Posts");
+        Controller controller = DataBase.getControllert("Posts/PeoplePosts");
         int postID = Post.getNewId();
         int personID = Integer.parseInt(personId);
         int communityID = Integer.parseInt(communityId);
@@ -24,13 +24,16 @@ public class AddPost {
         datasController controller2 = DataBase.getControllert2("Posts");
         controller2.createFile(postID + "");
         controller2.write(postID + " ", personID + " " + communityID + " {} " + title + "\n" + description);
-        Controller communityController = DataBase.getControllert("communities/CommunitiesPosts");
+        Controller communityController = DataBase.getControllert("communities");
         communityController.writeFile(postID + " " + personID + " " + communityID);
-        datasController communityController2 = DataBase.getControllert2("communities/CommunitiesPosts");
+        datasController communityController2 = DataBase.getControllert2("communities");
         communityController2.createFile(postID + "");
         communityController2.write(postID + " ", personID + " " + communityID + " {} " + title + "\n" + description);
-
-        controller2.write(postID + " ", personID + " " + communityID + " {} " + title + "\n" + description);
+        Controller personController = DataBase.getControllert("Accounts/PeoplePosts");
+        personController.writeFile(postID + " " + personID + " " + communityID);
+        datasController personController2 = DataBase.getControllert2("Accounts");
+        personController2.createFile(postID + "");
+        personController2.write(postID + " ", personID + " " + communityID + " {} " + title + "\n" + description);
         return "success " + postID;
 
     }
