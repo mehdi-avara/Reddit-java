@@ -52,7 +52,7 @@ public class Server {
         try {
 
             for (int i = 0; i < file.length; i++) {
-                DataBase.getSingleTone().addToDataBase(texts[i], new Controller(file[i].getAbsolutePath() + texts[i]));
+                DataBase.getDataBase().addToDataBase(texts[i], new Controller(file[i].getAbsolutePath() + texts[i]));
             }
 
         } catch (Exception ignored) {

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
 public class RefreshFile {
     public static void main(String[] args) throws IOException {
         File[] file = new File[13];
@@ -28,6 +29,7 @@ public class RefreshFile {
         file[11] = new File("D:\\ApProjectDataBase\\DataBase\\ChatRooms");
         file[12] = new File("D:\\ApProjectDataBase\\DataBase\\ChatRooms\\datas");
 
+
         texts[0] = "PeopleAccounts";
         texts[1] = "PeopleCommunities";
         texts[2] = "PeoplePosts";
@@ -51,11 +53,13 @@ public class RefreshFile {
                     item.mkdirs();
                 }
             }
-        } catch (Exception ignored) {
-        }
-        try {
+        }catch (Exception ignored){}
+        try{
             for (int i = 0; i < file.length; i++) {
-                File f = new File(file[i].getAbsolutePath() + "\\" + texts[i] + ".txt");
+                File f = new File(file[i].getAbsolutePath()+"\\"+texts[i]+".txt");
+                if (i==1||i==5||i==9||i==10||i==12) {
+                    continue;   
+                }
                 f.createNewFile();
                 fileWriters[i] = new FileWriter(f);
             }
@@ -106,6 +110,7 @@ public class RefreshFile {
         // regex (?<ownerId>[^ ]*) (?<postId>[^ ]*) [{]{1}(?<commentId>[^}]*)[}]{1}
         // (?<commentTitle>[^ ]*)[\n](?<discription>.*)
         firstCommentWriter.flush();
+
 
     }
 }

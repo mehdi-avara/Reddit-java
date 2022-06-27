@@ -61,4 +61,8 @@ public class datasController{
         }
         return;
     }
+    public int countFiles(){
+        File[] files = new File(file).listFiles();
+        return files.length;
+    }
 }
